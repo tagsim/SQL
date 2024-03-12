@@ -1,0 +1,131 @@
+CREATE TABLE Products (
+                        ProductID INT PRIMARY KEY,
+                        ProductName VARCHAR(100) NOT NULL,
+                        Description VARCHAR(250) NOT NULL,
+                        ProductCategory VARCHAR(100),
+                        Price DECIMAL (10,2));
+
+
+INSERT INTO Products (ProductID, ProductName, Description, ProductCategory, Price)
+VALUES(
+  (1, 'Laptop',	'Powerful laptop for work or entertainment.',	'Electronics',	1299.99),
+	(2,	'Smartphone',	'Feature-packed smartphone with a great camera.',	'Electronics',	749.99),
+	(3,	'Wireless Headset',	'Comfortable wireless headset for calls and music.',	'Electronics',	149.99),
+	(4,	'Running Shoes',	'Lightweight shoes for running or exercise.',	'Clothing & Shoes',	89.99),
+	(5,	'T-Shirt',	'Comfortable and stylish t-shirt.',	'Clothing & Shoes',	24.99),
+	(6,	'Jeans', 'Classic and versatile denim jeans.',	'Clothing & Shoes',	49.99,)
+	(7,	'Dress', 'Elegant dress for any occasion.	Clothing & Shoes',	79.99)
+	(8, 'Coffee Maker', 'Brews delicious coffee for any occasion.', 'Kitchen Appliances', 49.99),
+  	(9, 'Blender', 'Powerful blender for smoothies and more.', 'Kitchen Appliances', 79.99),
+  	(10, 'Food Processor', 'Multi-functional food processor for chopping, slicing, and more.', 'Kitchen Appliances', 99.99),
+  	(11, 'Electric Kettle', 'Quickly boils water for tea, coffee, or instant meals.', 'Kitchen Appliances', 29.99),
+  	(12, 'Toaster', 'Makes perfect toast every time.', 'Kitchen Appliances', 39.99),
+  	(13, 'Microwave', 'Compact and convenient microwave for reheating food.', 'Kitchen Appliances', 149.99),
+  	(14, 'Board Game', 'Fun and challenging board game for parties.', 'Games & Toys', 39.99),
+  	(15, 'Puzzle', 'Relaxing and engaging puzzle for all ages.', 'Games & Toys', 19.99),
+  	(16, 'Building Blocks', 'Creative and imaginative building blocks for children.', 'Games & Toys', 29.99),
+  	(17, 'Book', 'Captivating novel by a renowned author.', 'Books & Movies', 19.99),
+  	(18, 'Movie Blu-ray', 'Action-packed movie for a thrilling night.', 'Books & Movies', 24.99),
+  	(19, 'Documentary Blu-ray', 'Informative and educational documentary film.', 'Books & Movies', 19.99),
+  	(20, 'Music CD', 'Popular music album by a well-known artist.', 'Music', 14.99),
+  	(21, 'Vinyl Record', 'Classic vinyl record for a vintage listening experience.', 'Music', 24.99),
+  	(22, 'Gaming Console', 'Powerful console for immersive gaming experiences.', 'Electronics', 399.99),
+  	(23, 'Smartwatch', 'Sleek and functional smartwatch for everyday use.', 'Electronics', 249.99),
+  	(24, 'Tablet', 'Portable device for entertainment, work, and productivity.', 'Electronics', 299.99),
+  	(25, 'Backpack', 'Durable and stylish backpack for carrying essentials.', 'Clothing & Shoes', 59.99),
+  	(26, 'Jacket', 'Warm and comfortable jacket for cooler weather.', 'Clothing & Shoes', 99.99),
+  	(27, 'Hat', 'Stylish hat to complete any outfit.', 'Clothing & Shoes', 29.99),
+  	(28, 'Air Fryer', 'Versatile appliance for healthy and delicious cooking.', 'Kitchen Appliances', 129.99),
+  	(29, 'Pressure Cooker', 'Cooks food quickly and efficiently.', 'Kitchen Appliances', 79.99),
+  	(30, 'Stand Mixer', 'Powerful stand mixer for baking and other culinary tasks.', 'Kitchen Appliances', 199.99)
+  );
+
+SELECT *
+FROM Products;
+
+CREATE TABLE customer(
+  CustomerID INT PRIMARY KEY,
+  FirstName VARCHAR(100) NOT NULL,
+  LastName VARCHAR(100) NOT NULL
+  );
+
+INSERT INTO customer(CustomerID, FirstName, LastName)
+VALUES (INSERT INTO Customers (CustomerID, FirstName, Surname)
+VALUES(
+    (1, 'John', 'Smith'),
+  (2, 'Jane', 'Doe'),
+  (3, 'Michael', 'Lee'),
+  (4, 'Emily', 'Garcia'),
+  (5, 'David', 'Hernandez'),
+  (6, 'Sarah', 'Wilson'),
+  (7, 'William', 'Chen'),
+  (8, 'Amanda', 'Johnson'),
+  (9, 'Christopher', 'Brown'),
+  (10, 'Jennifer', 'Miller'),
+  (11, 'Daniel', 'Williams'),
+  (12, 'Olivia', 'Jones'),
+  (13, 'Ethan', 'Moore'),
+  (14, 'Sophia', 'Garcia'),
+  (15, 'Benjamin', 'Davis'),
+  (16, 'Charlotte', 'Rodriguez'),
+  (17, 'Noah', 'Hernandez'),
+  (18, 'Ava', 'Lopez'),
+  (19, 'Liam', 'Lewis'),
+  (20, 'Isabella', 'Clark'),
+  (21, 'Lucas', 'Walker'),
+  (22, 'Mia', 'Allen'),
+  (23, 'Jackson', 'Young'),
+  (24, 'Evelyn', 'Taylor'),
+  (25, 'Aiden', 'Baker'),
+  (26, 'Sofia', 'King'),
+  (27, 'Elijah', 'Scott'),
+  (28, 'Chloe', 'Green'),
+  (29, 'Matthew', 'Mitchell'),
+  (30, 'Hannah', 'Hall'));
+
+
+
+CREATE TABLE Order (  
+  OrderID SERIAL PRIMARY KEY,
+  CustomerID INT NOT NULL,
+  ProductID INT NOT NULL,
+  Quantity INT NOT NULL,
+  FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID),
+  FOREIGN KEY (ProductID) REFERENCES Product(ProductID)
+);
+
+INSERT INTO Order (OrderID, CustomerID, ProductID, Quantity)
+VALUES(
+  (14356, 1, 1, 1),  -- Order 1: John Smith (ID 1) buys Laptop (ID 1) - quantity 1
+  (14289, 2, 3, 1),  
+  (14383, 3, 4, 2),  
+  (14374, 4, 8, 1),  
+  (14345, 5, 11, 1), 
+  (14566, 6, 12, 2),  
+  (14537, 7, 1, 3),   
+  (14728, 8, 17, 2),  
+  (14259, 9, 18, 1),  
+  (14610, 10, 22, 1), 
+  (14591, 11, 23, 1),  
+  (14212, 12, 25, 1), 
+  (14613, 13, 26, 1), 
+  (14758, 14, 5, 3),  
+  (14915, 15, 28, 1), 
+  (14316, 16, 15, 3), 
+  (14817, 17, 6, 1),  
+  (14218, 18, 9, 1),  
+  (14619, 19, 20, 2), 
+  (14220, 20, 21, 1), 
+  (14721, 21, 14, 1), 
+  (14822, 22, 27, 2), 
+  (14223, 23, 29, 2), 
+  (14624, 24, 10, 2), 
+  (14825, 25, 30, 1),
+  (14256, 26, 2, 3),
+  (14257, 27, 17, 1),
+  (14278, 28, 29, 2),
+  (14259, 29, 27, 3),
+  (14308, 30, 25 1)); 
+  
+SELECT *
+FROM Order;
