@@ -1,1 +1,65 @@
+--excluding of column:
 
+SELECT * EXCLUDE animal_id
+  FROM austin_animal_center_intakes;
+
+--renaming of column:
+  SELECT * RENAME found_location AS found_at
+  FROM austin_animal_center_intakes
+
+--exclude must precede rename when used together:
+SELECT * EXCLUDE animal_id RENAME age_upon_intake AS age
+FROM austin_animal_center_intakes;
+
+--selecting last 15 rows in the table:
+SELECT *
+FROM austin_animal_center_intakes
+ORDER BY animal_id DESC
+LIMIT 15;
+
+--where and comparison operator clauses to filter dataset:
+SELECT year,
+        month,
+        animal_type,
+        count
+   FROM austin_animal_center_intakes_by_month
+  WHERE COUNT > 1000
+  AND animal_type = 'Dog';
+
+SELECT year,
+        month,
+        animal_type,
+        count
+   FROM austin_animal_center_intakes_by_month
+  WHERE COUNT > 900
+  AND animal_type != 'Dog';
+
+--EXERCISE 5: Using the description column in the allergies table, write a query that returns all of the patients with an allergy to mould.
+SELECT *
+FROM allergies
+WHERE allergies.description = 'Allergy to mould';
+
+--85 patients with allergy to mould:
+
+SELECT COUNT(*)
+FROM allergies
+WHERE allergies.description = 'Allergy to mould';
+
+--Using the column occurrences from the all_prevalences table, write a query that shows all of the conditions that show up more than 100 times in your data.
+
+SELECT * 
+FROM all_prevalences
+WHERE occurrences > 100;
+
+--Order by clause, order dataset by Year (asc/default) and Month (desc): 
+
+SELECT year,
+       month,
+       count,
+       animal_type
+  FROM austin_animal_center_intakes_by_month
+ WHERE animal_type = "Cat"
+ ORDER BY year, month DESC;
+
+--Altering a table:
+ALTER TABLE employee 
