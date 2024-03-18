@@ -100,4 +100,27 @@ WHERE description LIKE "%Acetaminophen%";
 
 --Exercise 16: Use the query you just wrote to return the same columns but leave out the results of Acetaminophen with either hydrocodone or oxycodone in them. Sort your results by dose, highest to lowest.
 
+SELECT patient,
+      description,
+      reasondescription
+FROM medications
+WHERE description LIKE "%Acetaminophen%"
+AND description NOT LIKE "%codone%";
 
+--BETWEEN 
+
+--Exercise 16: Using the patient, description and value columns in the observations table, write a query that returns all the patients expected to have between one and five quality years of life left.
+
+SELECT patient,
+        description,
+        value
+FROM observations
+WHERE description = "Quality adjusted life years"
+AND value BETWEEN 1 AND 5;
+
+--OFFSET: Detmining the rows to skip 
+
+SELECT *
+FROM observations
+LIMIT 10
+OFFSET 10;
