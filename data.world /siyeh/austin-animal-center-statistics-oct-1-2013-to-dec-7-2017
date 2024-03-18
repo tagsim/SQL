@@ -61,5 +61,43 @@ SELECT year,
  WHERE animal_type = "Cat"
  ORDER BY year, month DESC;
 
---Altering a table:
-ALTER TABLE employee 
+--Altering a table, creating new column:
+ALTER TABLE employee
+ADD COLUMN email VARCHAR(50);
+
+
+--Update rows, following new column creation:
+UPDATE customers
+SET email = 'Ffish@gmail.com
+WHERE id = 1;
+
+-- IS NULL/NOT NULL
+
+SELECT monthyear,
+       animal_type,
+       outcome_type,
+       outcome_subtype,
+       breed
+  FROM austin_animal_center_outcomes
+ WHERE outcome_subtype IS NOT NULL
+ AND breed IS NOT NULL;
+
+--Exercise 14: Using the patient, description, and reasondescription columns from the medications table, write a query that returns the records where reasondescription is not null.
+
+SELECT patient, 
+      description,
+      reasondescription
+FROM medications
+WHERE reasondescription IS NOT NULL;
+
+--Exercise 15: Write a query against the medications table that returns all of the patients who were given some form of Acetaminophen, what they were given, and the reason they were given it.
+
+SELECT patient,
+      description,
+      reasondescription
+FROM medications
+WHERE description LIKE "%Acetaminophen%";
+
+--Exercise 16: Use the query you just wrote to return the same columns but leave out the results of Acetaminophen with either hydrocodone or oxycodone in them. Sort your results by dose, highest to lowest.
+
+
