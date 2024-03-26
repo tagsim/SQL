@@ -110,3 +110,23 @@ WHERE overall
 SELECT item, overall_cost
 FROM customer_list
 WHERE overall_cost IN (50.50, 95.00);
+
+--counting values in table:
+SELECT COUNT(*), name
+FROM customer_list;
+
+--Taking an average of data in a table
+SELECT AVG(overall_cost)
+FROM customer_list;
+
+--Taking the sum of data in a table:
+SELECT SUM(overall_cost)
+FROM refinery_clients;
+
+SELECT MIN(overall_cost)
+FROM refinery_clients;
+
+SELECT MAX(overall_cost)
+FROM refinery_clients;
+
+
