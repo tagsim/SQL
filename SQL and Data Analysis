@@ -103,3 +103,10 @@ SELECT item, overall_cost
 FROM customer_list
 WHERE overall_cost >= 90.00
 
+SELECT item, overall_cost
+FROM customer_list
+WHERE overall
+
+SELECT item, overall_cost
+FROM customer_list
+WHERE overall_cost IN (50.50, 95.00);
