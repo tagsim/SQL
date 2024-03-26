@@ -1,0 +1,22 @@
+--sql table creation:
+CREATE TABLE customer_list (
+customer_id INT PRIMARY KEY,
+customer_name TEXT NOT NULL,
+customer_email TEXT NOT NULL,
+item VARCHAR(200),
+quantity INT,
+overall_cost DECIMAL (10,2)
+);
+
+INSERT INTO customer_list (customer_id, customer_name, customer_email, item, quantity, overall_cost)
+VALUES (
+  10233, 'Jennifer Jones', 'jj_123@gmail.com', 'Tea Doilley', 2, 23.00
+),
+(
+  10234, 'Stuart Hammond', 'hamstew@gmail.com', 'Keyboard', 1, 50.50
+),
+(
+  10235, 'Christan Davis', 'cdeeze@gmail.com', 'Plate set', 1, 90.00
+);
+
+select * from customer_list;
