@@ -1,4 +1,19 @@
 --sql table creation:
+
+CREATE TABLE temp_table(
+customer_id INT PRIMARY KEY, 
+name TEXT);
+
+INSERT INTO temp_table(customer_id, name)
+VALUES (15068, 'Cynthia Ryan');
+
+SELECT * FROM temp_table;
+
+--to drop table:
+DROP temp_table
+
+
+--Creation of new table:
 CREATE TABLE customer_list (
 customer_id INT PRIMARY KEY,
 customer_name TEXT NOT NULL,
@@ -17,6 +32,74 @@ VALUES (
 ),
 (
   10235, 'Christan Davis', 'cdeeze@gmail.com', 'Plate set', 1, 90.00
+),
+(
+  10236, 'Graem Lewis', 'lewsclues@gmail.com', 'Wardrobe', 1, 109.50
 );
 
 select * from customer_list;
+
+--to update table values:
+
+UPDATE customer_list
+SET overall_cost = 50.50
+WHERE customer_id = 10234;
+
+SELECT * FROM customer_list;
+
+--to delete value in table
+
+DELETE FROM customer_list
+WHERE customer_id = 10236
+
+SELECT * FROM customer_list;
+
+--Alteration of the table name:
+
+ALTER TABLE customer_list
+RENAME TO cust_purchase
+
+--Alteration of table to add new columns, do not forget column types and constraints!
+
+ALTER TABLE customer_list
+ADD Description TEXT NULL;
+
+ALTER TABLE customer_list
+ADD Location TEXT NULL;
+
+--How to fill the values into the table, through Updating dataset:
+
+UPDATE customer_list
+SET Description 'Perch your tea on the utimate style accessory.'
+WHERE customer_id = 10233;
+
+UPDATE customer_list
+SET Description = 'Fast and light keyboard'
+WHERE customer_id = 10234;
+
+UPDATE customer_list
+SET Description = 'Beautiful bone china set for homeware lovers.'
+WHERE customer_id = 10235;
+
+UPDATE customer_list
+SET Description = 'Brushed oak wardrobe for your prized items of clothing.'
+WHERE customer_id = 10236;
+
+UPDATE customer_list
+SET Location = 'London S' 
+WHERE customer_id = 10234 OR customer_id = 10236;
+
+UPDATE customer_list
+SET Location = 'London W' 
+WHERE customer_id = 10233 OR customer_id = 10235
+
+SELECT * FROM customer_list
+
+--To prevent the returning of repeated values, we use DISTINCT
+
+SELECT DISTINCT Location FROM customer_list;
+
+SELECT item, overall_cost
+FROM customer_list
+WHERE overall_cost >= 90.00
+
