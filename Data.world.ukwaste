@@ -1,0 +1,87 @@
+SELECT *
+FROM waste_on_uk_beaches;
+
+SELECT 
+    MIN(number_per_100m_of_beach) -- 15.1
+  , MAX(number_per_100m_of_beach) --225.3
+FROM waste_on_uk_beaches;
+
+SELECT item, 
+       number_per_100m_of_beach,
+       (SELECT AVG(number_per_100m_of_beach)
+        FROM waste_on_uk_beaches) AS avg_waste 
+FROM waste_on_uk_beaches
+HAVING number_per_100m_of_beach < avg_waste; 
+
+
+
+--Plastics/polystyrene peices 225 per 100m:
+
+SELECT 
+waste_on_uk_beaches.item, 
+ROUND(waste_on_uk_beaches.number_per_100m_of_beach)
+FROM waste_on_uk_beaches
+  WHERE waste_on_uk_beaches.number_per_100m_of_beach > 
+  (SELECT AVG(waste_on_uk_beaches.number_per_100m_of_beach)
+  FROM waste_on_uk_beaches);
+
+
+SELECT item, 
+       number_per_100m_of_beach,
+       RANK() OVER(PARTITION BY item ORDER BY number_per_100m_of_beach DESC) as rnk
+FROM waste_on_uk_beaches
+ORDER BY rnk; -- Order by the assigned rank
+
+
+---WITH CTE
+
+
+WITH item_averages AS (
+    SELECT item,
+     AVG(number_per_100m_of_beach) AS avg_waste
+    FROM waste_on_uk_beaches
+)
+SELECT w1.item, 
+       w1.number_per_100m_of_beach,
+       item_averages.avg_waste
+FROM waste_on_uk_beaches w1
+JOIN item_averages ON w1.item = item_averages.item
+WHERE w1.number_per_100m_of_beach >  item_averages.avg_waste; 
+
+WITH item_averages AS (
+    SELECT item,
+     AVG(number_per_100m_of_beach) AS avg_waste
+    FROM waste_on_uk_beaches
+    GROUP BY item
+)
+SELECT w1.item, 
+       w1.number_per_100m_of_beach,
+       item_averages.avg_waste
+FROM waste_on_uk_beaches w1
+JOIN item_averages ON w1.item = item_averages.item
+WHERE w1.number_per_100m_of_beach < item_averages.avg_waste; 
+
+
+
+WITH item_averages AS (
+    SELECT item,
+     AVG(number_per_100m_of_beach) AS avg_waste
+    FROM waste_on_uk_beaches
+    GROUP BY item
+)
+SELECT ia.item, 
+       ia.avg_waste, 
+       wb.number_per_100m_of_beach 
+FROM item_averages as ia
+INNER JOIN  waste_on_uk_beaches wb
+         ON ia.item = wb.item
+WHERE wb.number_per_100m_of_beach < ia.avg_waste; 
+
+
+
+
+
+
+
+
+
